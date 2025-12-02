@@ -1,0 +1,89 @@
+<div class="product-list-container">
+    <!-- Header with filters -->
+    <div class="filters-section">
+      <div class="container">
+        <div class="filters-header">
+          <h2>Products</h2>
+          <div class="filter-controls">
+            <!-- Category Filter -->
+            <div class="filter-group">
+              <label>Category:</label>
+              <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+              </select>
+            </div>
+  
+            <!-- Sort Filter -->
+            <div class="filter-group">
+              <label>Sort by:</label>
+              <select [(ngModel)]="sortBy" (change)="onSortChange()">
+                <option value="sales">Best Selling</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
+          </div>
+        </div>
+  
+        <div class="results-count">
+          Showing {{ filteredProducts.length }} products
+        </div>
+      </div>
+    </div>
+  
+    <!-- Products Grid -->
+    <div class="container">
+      <div class="products-grid">
+        <div class="product-card" *ngFor="let product of filteredProducts">
+          <!-- Product Image -->
+          <div class="product-image" (click)="viewProduct(product.id)">
+            <img [src]="product.image" [alt]="product.name">
+            <span class="discount-badge" *ngIf="product.discount">-{{ product.discount }}%</span>
+            <span class="stock-badge out-of-stock" *ngIf="!product.inStock">Out of Stock</span>
+          </div>
+  
+          <!-- Product Info -->
+          <div class="product-info">
+            <div class="product-category">{{ product.category }}</div>
+            <h3 class="product-name" (click)="viewProduct(product.id)">{{ product.name }}</h3>
+            
+            <!-- Rating -->
+            <div class="product-rating">
+              <div class="stars">
+                <span *ngFor="let filled of getStarArray(product.rating)" 
+                      [class.filled]="filled">★</span>
+              </div>
+              <span class="rating-text">{{ product.rating }} ({{ product.reviews }})</span>
+            </div>
+  
+            <!-- Price -->
+            <div class="product-price">
+              <span class="current-price">${{ product.price.toFixed(2) }}</span>
+              <span class="original-price" *ngIf="product.originalPrice">
+                ${{ product.originalPrice.toFixed(2) }}
+              </span>
+            </div>
+  
+            <!-- Sales Info -->
+            <div class="product-sales">
+              {{ product.sales }} sold
+            </div>
+  
+            <!-- Add to Cart Button -->
+            <button 
+              class="add-to-cart-btn" 
+              (click)="addToCart(product)"
+              [disabled]="!product.inStock">
+              {{ product.inStock ? 'Add to Cart' : 'Out of Stock' }}
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- No Results Message -->
+      <div class="no-results" *ngIf="filteredProducts.length === 0">
+        <p>No products found in this category.</p>
+      </div>
+    </div>
+  </div>

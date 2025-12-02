@@ -1,0 +1,118 @@
+<nav class="navbar">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-content">
+        <div>Free shipping on orders over $50</div>
+        <div class="top-bar-links">
+          <a href="#">Help</a>
+          <a href="#">Track Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navbar -->
+  <div class="main-navbar">
+    <div class="container">
+      <div class="navbar-content">
+        <!-- Logo -->
+        <div class="logo">
+          <h1>ShopHub</h1>
+        </div>
+
+        <!-- Search Bar - Desktop -->
+        <div class="search-bar desktop-only">
+          <input 
+            type="text" 
+            placeholder="Search products..."
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+          />
+          <button (click)="onSearch()" class="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Navigation Items -->
+        <div class="nav-items">
+          <!-- Wishlist -->
+          <a href="#" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="desktop-only">Wishlist</span>
+          </a>
+
+          <!-- Cart -->
+          <a href="#" class="nav-item cart-item">
+            <div class="cart-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+            </div>
+            <span class="desktop-only">Cart</span>
+          </a>
+
+          <!-- User Account -->
+          <a href="#" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="desktop-only">Account</span>
+          </a>
+
+          <!-- Mobile Menu Toggle -->
+          <button class="mobile-menu-btn mobile-only" (click)="toggleMobileMenu()">
+            <svg *ngIf="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg *ngIf="isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Menu -->
+      <div class="category-menu desktop-only">
+        <a href="#">Electronics</a>
+        <a href="#">Fashion</a>
+        <a href="#">Home & Garden</a>
+        <a href="#">Sports</a>
+        <a href="#">Books</a>
+        <a href="#">Sale</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" *ngIf="isMobileMenuOpen">
+    <div class="mobile-search">
+      <input 
+        type="text" 
+        placeholder="Search products..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      />
+    </div>
+    <div class="mobile-categories">
+      <a href="#">Electronics</a>
+      <a href="#">Fashion</a>
+      <a href="#">Home & Garden</a>
+      <a href="#">Sports</a>
+      <a href="#">Books</a>
+      <a href="#">Sale</a>
+    </div>
+  </div>
+</nav>
